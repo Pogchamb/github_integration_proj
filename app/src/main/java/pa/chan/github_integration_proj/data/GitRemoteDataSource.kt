@@ -1,17 +1,17 @@
 package pa.chan.github_integration_proj.data
 
 import pa.chan.github_integration_proj.data.dto.GitProjReposDto
-import pa.chan.github_integration_proj.data.dto.GitUserInfoDto
+import pa.chan.github_integration_proj.data.dto.GitUserDetailsDto
 
 class GitRemoteDataSource(
     private val gitApi: GitApi
 ) {
 
-    fun getUserDetails(token: String): GitUserInfoDto {
+    suspend fun getUserDetails(token: String): GitUserDetailsDto {
         return gitApi.getUserDetails(token)
     }
 
-    fun getRepos(url: String) : List<GitProjReposDto>{
+    suspend fun getRepos(url: String): List<GitProjReposDto> {
         return gitApi.getRepos(url)
     }
 }

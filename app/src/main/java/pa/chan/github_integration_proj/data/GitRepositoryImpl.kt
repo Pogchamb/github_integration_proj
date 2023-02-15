@@ -1,20 +1,20 @@
 package pa.chan.github_integration_proj.data
 
 import pa.chan.github_integration_proj.data.dto.GitProjReposDto
-import pa.chan.github_integration_proj.data.dto.GitUserInfoDto
+import pa.chan.github_integration_proj.data.extension.toModel
 import pa.chan.github_integration_proj.domain.GitRepository
+import pa.chan.github_integration_proj.domain.model.GitUserDetailsModel
 
 
 class GitRepositoryImpl(
     private val gitRemoteDataSource: GitRemoteDataSource
-): GitRepository {
+) : GitRepository {
 
-    override fun getUserDetails(token: String): GitUserInfoDto {
-
-        return gitRemoteDataSource.getUserDetails(token)
+    override suspend fun getUserDetails(token: String): GitUserDetailsModel {
+        return gitRemoteDataSource.getUserDetails(token).toModel()
     }
 
-    override fun getRepos(token: String): List<GitProjReposDto> {
+    override suspend fun getRepos(token: String): List<GitProjReposDto> {
         val url = getUserDetails(token).reposUrl?.substringAfter("users")
         return gitRemoteDataSource.getRepos(url.orEmpty())
     }

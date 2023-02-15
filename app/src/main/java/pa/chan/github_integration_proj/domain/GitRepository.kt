@@ -1,9 +1,9 @@
 package pa.chan.github_integration_proj.domain
 
 import pa.chan.github_integration_proj.data.dto.GitProjReposDto
-import pa.chan.github_integration_proj.data.dto.GitUserInfoDto
+import pa.chan.github_integration_proj.domain.model.GitUserDetailsModel
 
 interface GitRepository {
-    fun getUserDetails(token: String): GitUserInfoDto
-    fun getRepos(token: String): List<GitProjReposDto>
+    suspend fun getUserDetails(token: String): GitUserDetailsModel
+    suspend fun getRepos(token: String): List<GitProjReposDto>
 }

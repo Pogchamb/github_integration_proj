@@ -1,6 +1,6 @@
-package pa.chan.github_integration_proj.data.dto
+package pa.chan.github_integration_proj.domain.model
 
-data class GitUserInfoDto(
+data class GitUserDetailsModel(
     val login: String?,
     val id: String?,
     val avatarUrl: String?,

@@ -1,20 +1,18 @@
 package pa.chan.github_integration_proj.data
 
 import pa.chan.github_integration_proj.data.dto.GitProjReposDto
-import pa.chan.github_integration_proj.data.dto.GitUserInfoDto
+import pa.chan.github_integration_proj.data.dto.GitUserDetailsDto
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
 
 
-interface GitApi
-{
+interface GitApi {
     @GET("/user")
-    fun getUserDetails(@Header("Authorization: Bearer OAUTH-TOKEN") accessToken : String): GitUserInfoDto
-
+    suspend fun getUserDetails(@Header("Authorization: Bearer OAUTH-TOKEN") accessToken: String): GitUserDetailsDto
 
 
     @GET("/{url}")
-    fun getRepos(@Path(value = "url") url: String) : List<GitProjReposDto>
+    suspend fun getRepos(@Path(value = "url") url: String): List<GitProjReposDto>
 
 }
