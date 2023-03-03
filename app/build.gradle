@@ -70,4 +70,7 @@ dependencies {
     // dagger hilt
     implementation "com.google.dagger:hilt-android:2.44"
     kapt "com.google.dagger:hilt-compiler:2.44"
+
+    //secure pref
+    implementation "androidx.security:security-crypto:1.1.0-alpha05"
 }
