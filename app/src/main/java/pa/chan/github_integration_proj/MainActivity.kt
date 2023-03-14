@@ -2,6 +2,7 @@ package pa.chan.github_integration_proj
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import pa.chan.githubintagrationproj.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

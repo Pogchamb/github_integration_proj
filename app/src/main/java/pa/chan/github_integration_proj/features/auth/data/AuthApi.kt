@@ -9,3 +9,5 @@ interface AuthApi {
     @GET("/user")
     suspend fun getUserDetails(@Header("Authorization: Bearer OAUTH-TOKEN") accessToken: String): AuthUserDetailsDto
 }
+
+
