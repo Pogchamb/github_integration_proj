@@ -9,12 +9,16 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import dagger.hilt.android.AndroidEntryPoint
 import pa.chan.githubintagrationproj.R
 
 
+@AndroidEntryPoint
 class AuthFragment : Fragment() {
-    private lateinit var authInputLayout: TextInputLayout
-    private lateinit var authEditText: TextInputEditText
+    private lateinit var tokenInputLayout: TextInputLayout
+    private lateinit var tokenEditText: TextInputEditText
+    private lateinit var usernameInputLayout: TextInputLayout
+    private lateinit var usernameEditText: TextInputEditText
     private lateinit var authButton: MaterialButton
     private val viewModel: AuthViewModel by viewModels()
 
@@ -29,14 +33,17 @@ class AuthFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         authButton = view.findViewById(R.id.authButton)
-        authEditText = view.findViewById(R.id.authEditText)
-        authInputLayout = view.findViewById(R.id.authInputLayout)
+        usernameEditText = view.findViewById(R.id.usernameEditText)
+        usernameInputLayout = view.findViewById(R.id.usernameInputLayout)
+        tokenEditText = view.findViewById(R.id.tokenEditText)
+        tokenInputLayout = view.findViewById(R.id.tokenInputLayout)
 
 
 
         authButton.setOnClickListener {
-            val token: String = authEditText.text.toString()
-            viewModel.fetchUser(token)
+            val token: String = tokenEditText.text.toString()
+            val username: String = usernameEditText.text.toString()
+            viewModel.fetchUser(username, token)
         }
 
     }
