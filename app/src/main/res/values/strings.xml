@@ -5,4 +5,7 @@
     <string name="access_token">Personal access token</string>
     <string name="username">Username</string>
     <string name="sing_in">Sing in</string>
+
+    <string name="userNamePref">UserName</string>
+    <string name="userTokenPref">UserToken</string>
 </resources>
