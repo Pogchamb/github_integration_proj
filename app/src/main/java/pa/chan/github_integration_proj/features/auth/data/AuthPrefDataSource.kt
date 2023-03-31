@@ -1,8 +1,9 @@
 package pa.chan.github_integration_proj.features.auth.data
 
-import androidx.security.crypto.EncryptedSharedPreferences
+import android.content.SharedPreferences
+import javax.inject.Inject
 
-class AuthPrefDataSource(private val sharedPreferences: EncryptedSharedPreferences) {
+class AuthPrefDataSource @Inject constructor(private val sharedPreferences: SharedPreferences) {
 
     fun setUserToken(token: String) {
         sharedPreferences.edit()
@@ -10,8 +11,17 @@ class AuthPrefDataSource(private val sharedPreferences: EncryptedSharedPreferenc
             .apply()
     }
 
+    fun setUserName(username: String){
+        sharedPreferences.edit()
+            .putString("UserName", username)
+            .apply()
+    }
+
     fun getUserToken(): String?  {
         return sharedPreferences.getString("UserToken", "")
     }
 
+    fun getUserName(): String? {
+        return sharedPreferences.getString("UserName", "")
+    }
 }
