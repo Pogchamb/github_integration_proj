@@ -7,7 +7,7 @@ import retrofit2.http.Header
 
 interface AuthApi {
     @GET(value = "/user")
-    suspend fun getUserDetails(@Header("Authorization") credentials: String): AuthUserDetailsDto
+    suspend fun getUserDetails(@Header("Authorization") credential: String): AuthUserDetailsDto
 }
 
 

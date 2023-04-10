@@ -8,6 +8,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import pa.chan.github_integration_proj.features.auth.domain.AuthenticationUseCase
 import pa.chan.github_integration_proj.features.auth.domain.model.UserModel
+import retrofit2.HttpException
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,9 +21,21 @@ class AuthViewModel @Inject constructor(
     val userLiveData: LiveData<UserModel?>
         get() = _userLiveData
 
-    fun fetchUser(username: String ,token: String) {
+    private val _errorLiveData: MutableLiveData<CustomError> = MutableLiveData()
+    val errorLiveData: LiveData<CustomError>
+        get() = _errorLiveData
+
+    fun fetchUser(token: String) {
         viewModelScope.launch {
-            _userLiveData.postValue(authenticationUseCase(username ,token))
+            try {
+                _userLiveData.postValue(authenticationUseCase(token))
+            } catch (e: HttpException) {
+                when(e.code()) {
+                    401 -> _errorLiveData.postValue(CustomError.CUSTOM_HTTP_EXCEPTION)
+                }
+            } catch (e: UnknownHostException) {
+                _errorLiveData.postValue(CustomError.CUSTOM_UNKNOWN_HOST_EXCEPTION)
+            }
         }
     }
 
