@@ -8,8 +8,8 @@
 
     <string name="userTokenPref">UserToken</string>
 
-    <string name="CUSTOM_HTTP_EXCEPTION">Invalid token</string>
-    <string name="CUSTOM_UNKNOWN_HOST_EXCEPTION">There is no internet connection</string>
+    <string name="Connection_Exception">There is no internet connection</string>
+    <string name="Invalid_Credentials_Exception">Invalid token</string>
     <string name="errorBtn">Try again</string>
     <string name="emptyStr">The field should\'t be empty</string>
 </resources>

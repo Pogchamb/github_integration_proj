@@ -1,6 +1,8 @@
 package pa.chan.github_integration_proj.features.auth.data
 
 import pa.chan.github_integration_proj.features.auth.data.extension.toModel
+import pa.chan.github_integration_proj.features.auth.data.userExceptions.ConnectionException
+import pa.chan.github_integration_proj.features.auth.data.userExceptions.InvalidCredentialsException
 import pa.chan.github_integration_proj.features.auth.domain.AuthRepository
 import pa.chan.github_integration_proj.features.auth.domain.model.UserModel
 import retrofit2.HttpException
@@ -24,9 +26,9 @@ class AuthRepositoryImpl @Inject constructor(
                 ).toModel()
             }
         } catch (e: HttpException) {
-            throw e
+            throw InvalidCredentialsException
         } catch (e: UnknownHostException) {
-            throw e
+            throw ConnectionException
         }
 
     }

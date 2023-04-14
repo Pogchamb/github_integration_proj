@@ -12,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
+import pa.chan.github_integration_proj.features.auth.data.userExceptions.InvalidCredentialsException
 import pa.chan.githubintagrationproj.R
 
 
@@ -35,18 +36,15 @@ class AuthFragment : Fragment() {
         tokenEditText = view.findViewById(R.id.tokenEditText)
         tokenInputLayout = view.findViewById(R.id.tokenInputLayout)
 
-        viewModel.errorLiveData.observe(viewLifecycleOwner) { customError: CustomError ->
-            when (customError) {
-                CustomError.CUSTOM_HTTP_EXCEPTION -> {
-                    tokenInputLayout.isErrorEnabled = true
-                    tokenInputLayout.error = getString(R.string.CUSTOM_HTTP_EXCEPTION)
+        viewModel.errorLiveData.observe(viewLifecycleOwner) {
 
-                }
-                CustomError.CUSTOM_UNKNOWN_HOST_EXCEPTION -> {}
+            if (it is InvalidCredentialsException) {
+                tokenInputLayout.isErrorEnabled = true
+                tokenInputLayout.error = getString(it.errorMessage)
             }
 
             val snackBar =
-                Snackbar.make(view, customError.message, Snackbar.LENGTH_INDEFINITE)
+                Snackbar.make(view, getString(it.errorMessage), Snackbar.LENGTH_INDEFINITE)
                     .setAction(getString(R.string.errorBtn)) {}
 
             snackBar.show()
