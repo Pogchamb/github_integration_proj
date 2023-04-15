@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import pa.chan.github_integration_proj.features.auth.data.userExceptions.ConnectionException
+import pa.chan.github_integration_proj.features.auth.data.userExceptions.InvalidCredentialsException
+import pa.chan.github_integration_proj.features.auth.data.userExceptions.UserError
 import pa.chan.github_integration_proj.features.auth.domain.AuthenticationUseCase
 import pa.chan.github_integration_proj.features.auth.domain.model.UserModel
 import javax.inject.Inject
@@ -19,9 +22,19 @@ class AuthViewModel @Inject constructor(
     val userLiveData: LiveData<UserModel?>
         get() = _userLiveData
 
-    fun fetchUser(username: String ,token: String) {
+    private val _errorLiveData: MutableLiveData<UserError> = MutableLiveData()
+    val errorLiveData: LiveData<UserError>
+        get() = _errorLiveData
+
+    fun fetchUser(token: String) {
         viewModelScope.launch {
-            _userLiveData.postValue(authenticationUseCase(username ,token))
+            try {
+                _userLiveData.postValue(authenticationUseCase(token))
+            } catch (e: InvalidCredentialsException) {
+                _errorLiveData.postValue(e)
+            } catch (e: ConnectionException) {
+                _errorLiveData.postValue(e)
+            }
         }
     }
 

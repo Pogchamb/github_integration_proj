@@ -6,6 +6,10 @@
     <string name="username">Username</string>
     <string name="sing_in">Sing in</string>
 
-    <string name="userNamePref">UserName</string>
     <string name="userTokenPref">UserToken</string>
+
+    <string name="Connection_Exception">There is no internet connection</string>
+    <string name="Invalid_Credentials_Exception">Invalid token</string>
+    <string name="errorBtn">Try again</string>
+    <string name="emptyStr">The field should\'t be empty</string>
 </resources>
