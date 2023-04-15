@@ -6,7 +6,6 @@ import pa.chan.github_integration_proj.features.auth.data.userExceptions.Invalid
 import pa.chan.github_integration_proj.features.auth.domain.AuthRepository
 import pa.chan.github_integration_proj.features.auth.domain.model.UserModel
 import retrofit2.HttpException
-import java.net.UnknownHostException
 import javax.inject.Inject
 
 
@@ -27,7 +26,7 @@ class AuthRepositoryImpl @Inject constructor(
             }
         } catch (e: HttpException) {
             throw InvalidCredentialsException
-        } catch (e: UnknownHostException) {
+        } catch (e: Exception) {
             throw ConnectionException
         }
 

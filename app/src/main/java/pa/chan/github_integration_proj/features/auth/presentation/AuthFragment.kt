@@ -44,8 +44,7 @@ class AuthFragment : Fragment() {
             }
 
             val snackBar =
-                Snackbar.make(view, getString(it.errorMessage), Snackbar.LENGTH_INDEFINITE)
-                    .setAction(getString(R.string.errorBtn)) {}
+                Snackbar.make(view, getString(it.errorMessage), Snackbar.LENGTH_SHORT)
 
             snackBar.show()
         }
