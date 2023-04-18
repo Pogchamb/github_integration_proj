@@ -1,12 +1,12 @@
-package pa.chan.github_integration_proj.features.repos.data.dto
+package pa.chan.github_integration_proj.features.repos.data.entity
 
-data class ReposDTO(
+data class ReposEntity(
     val id: String?,
     val nodeId: String?,
     val name: String?,
     val fullName: String?,
     val private: Boolean,
-    val owner: OwnerDto,
+    val owner: OwnerEntity,
     val htmlUrl: String?,
     val description: String?,
     val fork: String?,
@@ -82,7 +82,7 @@ data class ReposDTO(
     val defaultBranch: String?
 )
 
-data class OwnerDto(
+data class OwnerEntity(
     val login: String,
     val id: String,
     val nodeId: String,
