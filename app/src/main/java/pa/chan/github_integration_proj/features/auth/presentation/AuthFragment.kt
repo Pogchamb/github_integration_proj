@@ -7,14 +7,12 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import pa.chan.github_integration_proj.features.auth.data.userExceptions.InvalidCredentialsException
-import pa.chan.github_integration_proj.features.repos.presentation.ReposFragment
 import pa.chan.githubintagrationproj.R
 
 
@@ -37,12 +35,6 @@ class AuthFragment : Fragment() {
         authButton = view.findViewById(R.id.authButton)
         tokenEditText = view.findViewById(R.id.tokenEditText)
         tokenInputLayout = view.findViewById(R.id.tokenInputLayout)
-
-
-        viewModel.userLiveData.observe(viewLifecycleOwner) {
-            val reposFragment = ReposFragment()
-            reposFragment.arguments?.putParcelable("userInfo", it)
-        }
 
         viewModel.errorLiveData.observe(viewLifecycleOwner) {
 
@@ -78,14 +70,6 @@ class AuthFragment : Fragment() {
                 }
                 else -> {
                     viewModel.fetchUser(token)
-                    val userData = viewModel.userLiveData.value
-                    val action = userData?.let { userInfo ->
-                        AuthFragmentDirections.actionAuthFragmentToReposFragment(
-                            userInfo
-                        )
-                    }
-                    action?.let { findNavController().navigate(it) }
-
                 }
             }
         }

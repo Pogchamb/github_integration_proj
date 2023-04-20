@@ -13,6 +13,15 @@ fun ReposDTO.toModel(): ReposModel = ReposModel(
     language = this.language
 )
 
+fun ReposDTO.toEntity(): ReposEntity = ReposEntity(
+    id = this.id,
+    nodeId = this.nodeId,
+    name = this.name,
+    fullName = this.fullName,
+    private = this.private,
+    language = this.language
+)
+
 fun ReposEntity.toModel(): ReposModel = ReposModel(
     id = this.id,
     nodeId = this.nodeId,

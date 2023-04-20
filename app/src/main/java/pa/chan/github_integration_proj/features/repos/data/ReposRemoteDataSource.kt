@@ -6,7 +6,7 @@ import javax.inject.Inject
 class ReposRemoteDataSource @Inject constructor(
     private val reposApi: ReposApi
 ) {
-    suspend fun getUserRepos(reposPath: String): List<ReposDTO> {
-        return reposApi.getUserRepos(reposPath)
+    suspend fun getUserRepos(userName: String): List<ReposDTO> {
+        return reposApi.getUserRepos(userName)
     }
 }

@@ -15,4 +15,18 @@ class AuthPrefDataSource @Inject constructor(private val sharedPreferences: Shar
     fun getUserToken(): String?  {
         return sharedPreferences.getString(R.string.userTokenPref.toString(), "")
     }
+
+    fun setUserName(userName: String) {
+        sharedPreferences.edit()
+            .putString(R.string.userNamePref.toString(), userName)
+            .apply()
+    }
+
+    fun getUserName(): String? {
+        return sharedPreferences.getString(R.string.userNamePref.toString(), "")
+    }
+
+    fun clearAll() {
+        sharedPreferences.edit().clear().apply()
+    }
 }

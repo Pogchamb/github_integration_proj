@@ -1,5 +1,6 @@
 package pa.chan.github_integration_proj.features.repos.data
 
+import pa.chan.github_integration_proj.features.repos.data.extension.toEntity
 import pa.chan.github_integration_proj.features.repos.data.extension.toModel
 import pa.chan.github_integration_proj.features.repos.domain.ReposRepository
 import pa.chan.github_integration_proj.features.repos.domain.model.ReposModel
@@ -14,6 +15,7 @@ class ReposRepositoryImpl @Inject constructor(
             remoteDataSource
                 .getUserRepos(reposPath)
                 .map {
+                    localDataSource.setRepos(it.toEntity())
                     it.toModel()
                 }
         } catch (e: Exception) {

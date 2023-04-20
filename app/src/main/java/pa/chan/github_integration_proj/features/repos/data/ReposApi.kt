@@ -5,6 +5,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface ReposApi {
-    @GET("/{reposPath}")
-    suspend fun getUserRepos(@Path(value = "reposPath") reposPath: String): List<ReposDTO>
+    @GET("/users/{userName}/repos")
+    suspend fun getUserRepos(@Path(value = "userName") userName: String): List<ReposDTO>
 }
