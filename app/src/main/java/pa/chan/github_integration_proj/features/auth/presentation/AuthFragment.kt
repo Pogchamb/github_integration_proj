@@ -60,7 +60,7 @@ class AuthFragment : Fragment() {
             }
         }
 
-        authButton.setOnClickListener {
+        authButton.setOnClickListener { _ ->
             val token: String = tokenEditText.text.toString()
 
             when {
@@ -73,5 +73,9 @@ class AuthFragment : Fragment() {
                 }
             }
         }
+
+
+
+
     }
 }

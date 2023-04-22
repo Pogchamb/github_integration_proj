@@ -1,6 +1,6 @@
 package pa.chan.github_integration_proj.features.repos.data.dto
 
-data class ProjReposDto(
+data class ReposDTO(
     val id: String?,
     val nodeId: String?,
     val name: String?,

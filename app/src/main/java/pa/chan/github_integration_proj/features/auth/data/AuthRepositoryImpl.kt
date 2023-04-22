@@ -18,6 +18,7 @@ class AuthRepositoryImpl @Inject constructor(
             return if (authPrefDataSource.getUserToken().isNullOrEmpty()) {
                 val user = authRemoteDataSource.getUserDetails(token)
                 authPrefDataSource.setUserToken(token)
+                authPrefDataSource.setUserName(user.login.toString())
                 user.toModel()
             } else {
                 authRemoteDataSource.getUserDetails(
