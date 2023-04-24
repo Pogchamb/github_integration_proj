@@ -1,4 +1,4 @@
-package pa.chan.github_integration_proj
+package pa.chan.github_integration_proj.features.core
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

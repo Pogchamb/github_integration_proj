@@ -1,11 +1,15 @@
 package pa.chan.github_integration_proj.features.repos.data.entity
 
-data class ReposEntity(
-    val id: String?,
-    val nodeId: String?,
-    val name: String?,
-    val fullName: String?,
-    val private: Boolean,
-    val language: String?,
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+class ReposEntity(
+    @PrimaryKey var id: String = "",
+    var nodeId: String = "",
+    var name: String? = "",
+    var fullName: String? = "",
+    var private: Boolean = false,
+    var language: String? = "",
 )
 

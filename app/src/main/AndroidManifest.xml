@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:name="pa.chan.github_integration_proj.App"
+        android:name="pa.chan.github_integration_proj.features.core.App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -12,9 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Github_Intagration_Proj"
-        tools:targetApi="31">
+        tools:targetApi="33">
         <activity
-            android:name="pa.chan.github_integration_proj.MainActivity"
+            android:name="pa.chan.github_integration_proj.features.core.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
