@@ -19,9 +19,5 @@
         android:name="pa.chan.github_integration_proj.features.repos.presentation.ReposFragment"
         android:label="ReposFragment"
         tools:layout="@layout/fragment_repos">
-
-        <argument
-            android:name="userInfo"
-            app:argType="pa.chan.github_integration_proj.features.auth.domain.model.UserModel" />
     </fragment>
 </navigation>

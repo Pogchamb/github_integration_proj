@@ -10,47 +10,20 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import pa.chan.github_integration_proj.features.auth.data.AuthApi
 import pa.chan.github_integration_proj.features.auth.data.AuthRepositoryImpl
 import pa.chan.github_integration_proj.features.auth.domain.AuthRepository
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class AuthAppModule {
     companion object {
-        private const val url = "https://api.github.com"
-
-        @Provides
-        @Singleton
-        fun provideOkHttpClient(): OkHttpClient {
-            val interceptor = HttpLoggingInterceptor()
-            interceptor.level = HttpLoggingInterceptor.Level.BODY
-            return OkHttpClient.Builder()
-                .addInterceptor(interceptor)
-                .build()
-        }
-
-        @Provides
-        @Singleton
-        fun provideRetrofitBuilder(okHttpClient: OkHttpClient): Retrofit {
-            return  Retrofit.Builder()
-                .baseUrl(url)
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-        }
-
         @Provides
         @Singleton
         fun provideAuthApi(retrofit: Retrofit): AuthApi =
             retrofit.create(AuthApi::class.java)
-
-
 
         @Provides
         @Singleton
@@ -62,7 +35,10 @@ abstract class AuthAppModule {
 
         @Provides
         @Singleton
-        fun provideEncryptedSharedPreferences(@ApplicationContext context: Context ,key: MasterKey): SharedPreferences {
+        fun provideEncryptedSharedPreferences(
+            @ApplicationContext context: Context,
+            key: MasterKey
+        ): SharedPreferences {
             return EncryptedSharedPreferences.create(
                 context,
                 "UserToken",

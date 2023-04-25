@@ -7,13 +7,12 @@ import pa.chan.github_integration_proj.features.repos.data.entity.ReposEntity
 
 
 @Dao
-interface ReposDao : List<ReposEntity> {
+interface ReposDao {
 
     @Query("SELECT * FROM reposentity")
     suspend fun getAll(): List<ReposEntity>
 
     @Insert
     suspend fun insert(reposEntity: ReposEntity)
-
 
 }

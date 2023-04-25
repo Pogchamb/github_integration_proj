@@ -10,10 +10,10 @@ class ReposRepositoryImpl @Inject constructor(
     private val remoteDataSource: ReposRemoteDataSource,
     private val localDataSource: ReposLocalDataSource
 ) : ReposRepository {
-    override suspend fun getUserRepos(reposPath: String): List<ReposModel> {
+    override suspend fun getUserRepos(userName: String): List<ReposModel> {
         return try {
             remoteDataSource
-                .getUserRepos(reposPath)
+                .getUserRepos(userName)
                 .map {
                     localDataSource.setRepos(it.toEntity())
                     it.toModel()
