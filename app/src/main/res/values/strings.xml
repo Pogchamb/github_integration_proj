@@ -13,4 +13,8 @@
     <string name="Invalid_Credentials_Exception">Invalid token</string>
     <string name="errorBtn">Try again</string>
     <string name="emptyStr">The field should\'t be empty</string>
+
+    <string name="header_repos">Repositories</string>
+
+    <string name="retry">Retry</string>
 </resources>
