@@ -19,5 +19,8 @@
         android:name="pa.chan.github_integration_proj.features.repos.presentation.ReposFragment"
         android:label="ReposFragment"
         tools:layout="@layout/fragment_repos">
+        <action
+            android:id="@+id/action_reposFragment_to_authFragment"
+            app:destination="@id/authFragment" />
     </fragment>
 </navigation>

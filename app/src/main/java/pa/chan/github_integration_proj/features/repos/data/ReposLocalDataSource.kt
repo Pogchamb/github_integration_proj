@@ -11,4 +11,10 @@ class ReposLocalDataSource @Inject constructor(private val reposDao: ReposDao) {
     suspend fun setRepos(reposEntity: ReposEntity) {
         return reposDao.insert(reposEntity)
     }
+
+    suspend fun clearAll() {
+
+        return reposDao.clearAll()
+
+    }
 }

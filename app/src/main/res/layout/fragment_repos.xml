@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg">
@@ -40,13 +39,14 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/reposList"
+        android:id="@+id/reposRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@id/header" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ErrorField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/header">
 
         <ImageView
-            android:id="@+id/errorImg"
+            android:id="@+id/ErrorImg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/connection_error_svg"
@@ -63,30 +63,28 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/errorName"
+            android:id="@+id/ErrorName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Connection Error"
             android:textColor="@color/white"
 
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/errorImg" />
+            app:layout_constraintTop_toBottomOf="@id/ErrorImg" />
 
         <TextView
-            android:id="@+id/errorMessage"
+            android:id="@+id/ErrorMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Error message, doing something"
             android:textColor="@color/white"
 
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/errorName" />
+            app:layout_constraintTop_toBottomOf="@id/ErrorName" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

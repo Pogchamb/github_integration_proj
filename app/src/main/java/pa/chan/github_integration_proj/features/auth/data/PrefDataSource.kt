@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import pa.chan.githubintagrationproj.R
 import javax.inject.Inject
 
-class AuthPrefDataSource @Inject constructor(private val sharedPreferences: SharedPreferences) {
+class PrefDataSource @Inject constructor(private val sharedPreferences: SharedPreferences) {
 
     fun setUserToken(token: String) {
         sharedPreferences.edit()
@@ -12,7 +12,7 @@ class AuthPrefDataSource @Inject constructor(private val sharedPreferences: Shar
             .apply()
     }
 
-    fun getUserToken(): String?  {
+    fun getUserToken(): String? {
         return sharedPreferences.getString(R.string.userTokenPref.toString(), "")
     }
 
@@ -22,8 +22,8 @@ class AuthPrefDataSource @Inject constructor(private val sharedPreferences: Shar
             .apply()
     }
 
-    fun getUserName(): String? {
-        return sharedPreferences.getString(R.string.userNamePref.toString(), "")
+    fun getUserName(): String {
+        return sharedPreferences.getString(R.string.userNamePref.toString(), "").toString()
     }
 
     fun clearAll() {
