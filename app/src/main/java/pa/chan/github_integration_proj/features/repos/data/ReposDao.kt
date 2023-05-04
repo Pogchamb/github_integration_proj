@@ -15,4 +15,7 @@ interface ReposDao {
     @Insert
     suspend fun insert(reposEntity: ReposEntity)
 
+    @Query("DELETE FROM reposentity")
+    suspend fun clearAll()
+
 }

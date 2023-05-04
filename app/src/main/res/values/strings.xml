@@ -9,7 +9,7 @@
     <string name="userTokenPref">userToken</string>
     <string name="userNamePref">userName</string>
 
-    <string name="Connection_Exception">There is no internet connection</string>
+    <string name="Connection_Exception">Check your internet connection</string>
     <string name="Invalid_Credentials_Exception">Invalid token</string>
     <string name="errorBtn">Try again</string>
     <string name="emptyStr">The field should\'t be empty</string>
@@ -17,4 +17,12 @@
     <string name="header_repos">Repositories</string>
 
     <string name="retry">Retry</string>
+    <string name="EmptyRepos">No repositories at the moment</string>
+    <string name="somethingError">Something was wrong</string>
+
+    //Error names
+    <string name="empty">Empty</string>
+    <string name="connection">Connection Error</string>
+    <string name="something">Something error</string>
+    <string name="invalidCredent">Invalid credentials</string>
 </resources>

@@ -7,40 +7,47 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.google.android.material.button.MaterialButton
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import pa.chan.github_integration_proj.features.auth.data.userExceptions.InvalidCredentialsException
 import pa.chan.githubintagrationproj.R
+import pa.chan.githubintagrationproj.databinding.FragmentAuthBinding
 
 
 @AndroidEntryPoint
 class AuthFragment : Fragment() {
-    private lateinit var tokenInputLayout: TextInputLayout
-    private lateinit var tokenEditText: TextInputEditText
-    private lateinit var authButton: MaterialButton
     private val viewModel: AuthViewModel by viewModels()
 
+    private var _binding: FragmentAuthBinding? = null
+    private val binding get() = _binding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_auth, container, false)
+        _binding = FragmentAuthBinding.inflate(inflater, container, false)
+        val view = binding?.root
+        return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        authButton = view.findViewById(R.id.authButton)
-        tokenEditText = view.findViewById(R.id.tokenEditText)
-        tokenInputLayout = view.findViewById(R.id.tokenInputLayout)
+
+
+        val authButton = binding?.authButton
+        val tokenEditText = binding?.tokenEditText
+        val tokenInputLayout = binding?.tokenInputLayout
 
         viewModel.errorLiveData.observe(viewLifecycleOwner) {
 
             if (it is InvalidCredentialsException) {
-                tokenInputLayout.isErrorEnabled = true
-                tokenInputLayout.error = getString(it.errorMessage)
+                tokenInputLayout?.isErrorEnabled = true
+                tokenInputLayout?.error = getString(it.errorMessage)
             }
 
             val snackBar =
@@ -49,32 +56,35 @@ class AuthFragment : Fragment() {
             snackBar.show()
         }
 
-        tokenEditText.addTextChangedListener {
-            if (tokenInputLayout.isErrorEnabled) {
+        viewModel.userLiveData.observe(viewLifecycleOwner) {
+            val action = AuthFragmentDirections.actionAuthFragmentToReposFragment()
+            findNavController().navigate(action)
+        }
+
+        tokenEditText?.addTextChangedListener {
+            if (tokenInputLayout?.isErrorEnabled == true) {
                 tokenInputLayout.isErrorEnabled = false
             }
 
             if (tokenEditText.text.isNullOrEmpty()) {
-                tokenInputLayout.isErrorEnabled = true
-                tokenInputLayout.error = getString(R.string.emptyStr)
+                tokenInputLayout?.isErrorEnabled = true
+                tokenInputLayout?.error = getString(R.string.emptyStr)
             }
         }
 
-        authButton.setOnClickListener { _ ->
-            val token: String = tokenEditText.text.toString()
+        authButton?.setOnClickListener { _ ->
+            val token: String = tokenEditText?.text.toString()
 
             when {
                 token.isEmpty() -> {
-                    tokenInputLayout.isErrorEnabled = true
-                    tokenInputLayout.error = getString(R.string.emptyStr)
+                    tokenInputLayout?.isErrorEnabled = true
+                    tokenInputLayout?.error = getString(R.string.emptyStr)
                 }
                 else -> {
                     viewModel.fetchUser(token)
                 }
             }
         }
-
-
 
 
     }

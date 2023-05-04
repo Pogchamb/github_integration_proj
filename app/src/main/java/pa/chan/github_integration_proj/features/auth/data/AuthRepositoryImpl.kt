@@ -11,18 +11,18 @@ import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
     private val authRemoteDataSource: AuthRemoteDataSource,
-    private val authPrefDataSource: AuthPrefDataSource
+    private val prefDataSource: PrefDataSource
 ) : AuthRepository {
     override suspend fun getUserDetails(token: String): UserModel {
         try {
-            return if (authPrefDataSource.getUserToken().isNullOrEmpty()) {
+            return if (prefDataSource.getUserToken().isNullOrEmpty()) {
                 val user = authRemoteDataSource.getUserDetails(token)
-                authPrefDataSource.setUserToken(token)
-                authPrefDataSource.setUserName(user.login.toString())
+                prefDataSource.setUserToken(token)
+                prefDataSource.setUserName(user.login.toString())
                 user.toModel()
             } else {
                 authRemoteDataSource.getUserDetails(
-                    authPrefDataSource.getUserToken().orEmpty()
+                    prefDataSource.getUserToken().orEmpty()
                 ).toModel()
             }
         } catch (e: HttpException) {

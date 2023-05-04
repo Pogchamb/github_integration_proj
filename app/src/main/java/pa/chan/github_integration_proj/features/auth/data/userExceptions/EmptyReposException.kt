@@ -2,11 +2,11 @@ package pa.chan.github_integration_proj.features.auth.data.userExceptions
 
 import pa.chan.githubintagrationproj.R
 
-object ConnectionException : Throwable(), UserError {
+object EmptyReposException:Throwable(), UserError {
     override val errorMessage: Int
-        get() = R.string.Connection_Exception
+        get() = R.string.EmptyRepos
     override val errorName: Int
-        get() = R.string.connection
+        get() = R.string.empty
     override val errorImg: Int
-        get() = R.drawable.connection_error_svg
+        get() = R.drawable.empty_svg
 }
