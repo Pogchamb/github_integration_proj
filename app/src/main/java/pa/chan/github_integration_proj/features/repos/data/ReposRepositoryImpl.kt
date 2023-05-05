@@ -16,11 +16,12 @@ class ReposRepositoryImpl @Inject constructor(
 ) : ReposRepository {
     override suspend fun getUserRepos(): List<ReposModel> {
         return try {
+            localDataSource.clearAll()
             remoteDataSource
                 .getUserRepos(prefDataSource.getUserName())
-                .map {
-                    localDataSource.setRepos(it.toEntity())
-                    it.toModel()
+                .forEach { reposDto ->
+                    localDataSource.setRepos(reposDto.toEntity())
+
                 }
             if (getUserReposHistory().isEmpty()) throw EmptyReposException
             getUserReposHistory()

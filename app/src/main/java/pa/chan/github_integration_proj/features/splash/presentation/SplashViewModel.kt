@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import pa.chan.github_integration_proj.features.splash.domain.DetectionTokenUseCase
+import pa.chan.github_integration_proj.features.splash.domain.DetectTokenUseCase
 import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val detectionTokenUseCase: DetectionTokenUseCase
+    private val detectTokenUseCase: DetectTokenUseCase
 ) : ViewModel()  {
 
     private val _detectionTokenLiveData: MutableLiveData<TransitionAction> = MutableLiveData()
@@ -18,7 +18,7 @@ class SplashViewModel @Inject constructor(
 
 
     fun selectAction() {
-        if (detectionTokenUseCase()) {
+        if (detectTokenUseCase()) {
             _detectionTokenLiveData.postValue(TransitionAction.GoToLogin)
         } else {
             _detectionTokenLiveData.postValue(TransitionAction.GoToRepos)

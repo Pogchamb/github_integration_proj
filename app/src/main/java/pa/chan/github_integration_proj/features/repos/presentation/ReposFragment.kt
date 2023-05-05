@@ -41,14 +41,14 @@ class ReposFragment : Fragment() {
 
         viewModel.reposLiveData.observe(viewLifecycleOwner) {
             binding?.reposRecyclerView?.visibility = View.VISIBLE
-            binding?.errorBtn?.visibility = View.INVISIBLE
-            binding?.ErrorField?.visibility = View.INVISIBLE
+            binding?.errorBtn?.visibility = View.GONE
+            binding?.ErrorField?.visibility = View.GONE
             binding?.reposRecyclerView?.adapter = ReposAdapter(it)
         }
 
         viewModel.errorLiveData.observe(viewLifecycleOwner) {
 
-            binding?.reposRecyclerView?.visibility = View.INVISIBLE
+            binding?.reposRecyclerView?.visibility = View.GONE
             binding?.errorBtn?.visibility = View.VISIBLE
             binding?.ErrorField?.visibility = View.VISIBLE
             binding?.ErrorImg?.setImageResource(it.errorImg)

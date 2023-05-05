@@ -2,7 +2,7 @@ package pa.chan.github_integration_proj.features.auth.data.userExceptions
 
 import pa.chan.githubintagrationproj.R
 
-object SomethingException: Throwable(), UserError {
+object UnknownException: Throwable(), UserError {
     override val errorMessage: Int
         get() = R.string.somethingError
     override val errorName: Int
