@@ -16,19 +16,20 @@ class ReposRepositoryImpl @Inject constructor(
 ) : ReposRepository {
     override suspend fun getUserRepos(): List<ReposModel> {
         return try {
-            localDataSource.clearAll()
-            remoteDataSource
+            val reposList = remoteDataSource
                 .getUserRepos(prefDataSource.getUserName())
-                .forEach { reposDto ->
-                    localDataSource.setRepos(reposDto.toEntity())
-
+                .map {
+                    localDataSource.setRepos(it.toEntity())
+                    it.toModel()
                 }
             if (getUserReposHistory().isEmpty()) throw EmptyReposException
-            getUserReposHistory()
+            reposList
         } catch (e: EmptyReposException) {
             throw e
         } catch (e: Exception) {
-            throw ConnectionException
+            getUserReposHistory().ifEmpty {
+                throw ConnectionException
+            }
         }
 
     }
