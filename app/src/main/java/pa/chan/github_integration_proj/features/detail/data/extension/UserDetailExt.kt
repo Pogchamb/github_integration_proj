@@ -18,29 +18,16 @@ fun LicenseDto.toModel(): LicenseModel = LicenseModel(
 )
 
 fun ReadmeDto.toModel(): ReadmeModel = ReadmeModel(
-    type = this.type,
     encoding = this.encoding,
-    size = this.size,
     name = this.name,
     path = this.path,
     content = this.content,
-    sha = this.sha,
     url = this.url,
-    gitUrl = this.gitUrl,
-    htmlUrl = this.htmlUrl,
-    downloadUrl = this.downloadUrl,
-    links = LinksModel(
-        git = this.links.git,
-        self = this.links.self,
-        html = this.links.html
-    )
 )
 
 fun RepoDetailDto.toModel(): RepoDetailModel = RepoDetailModel(
-    id = this.id,
     name = this.name,
     fullName = this.fullName,
-    private = this.private,
     htmlUrl = this.htmlUrl,
     starsCount = this.starsCount,
     watchersCount = this.watchersCount,
@@ -104,29 +91,16 @@ fun LicenseEntity.toModel(): LicenseModel = LicenseModel(
 )
 
 fun ReadmeEntity.toModel(): ReadmeModel = ReadmeModel(
-    type = this.type,
     encoding = this.encoding,
-    size = this.size,
     name = this.name,
     path = this.path,
     content = this.content,
-    sha = this.sha,
     url = this.url,
-    gitUrl = this.gitUrl,
-    htmlUrl = this.htmlUrl,
-    downloadUrl = this.downloadUrl,
-    links = LinksModel(
-        git = this.links.git,
-        self = this.links.self,
-        html = this.links.html
-    )
 )
 
 fun RepoDetailEntity.toModel(): RepoDetailModel = RepoDetailModel(
-    id = this.id,
     name = this.name,
     fullName = this.fullName,
-    private = this.private,
     htmlUrl = this.htmlUrl,
     starsCount = this.starsCount,
     watchersCount = this.watchersCount,
