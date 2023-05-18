@@ -1,4 +1,4 @@
-package pa.chan.github_integration_proj.features.repos.domain
+package pa.chan.github_integration_proj.features.detail.domain
 
 import pa.chan.github_integration_proj.features.auth.domain.AuthRepository
 import javax.inject.Inject

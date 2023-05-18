@@ -8,5 +8,4 @@ interface ReposRepository {
 
     suspend fun getUserReposHistory(): List<ReposModel>
 
-    suspend fun logOut()
 }

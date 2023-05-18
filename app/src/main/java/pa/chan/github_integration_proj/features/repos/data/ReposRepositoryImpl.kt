@@ -42,8 +42,4 @@ class ReposRepositoryImpl @Inject constructor(
             }
     }
 
-    override suspend fun logOut() {
-        localDataSource.clearAll()
-        prefDataSource.clearAll()
-    }
 }
