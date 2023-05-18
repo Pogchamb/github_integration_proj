@@ -5,13 +5,17 @@ import pa.chan.github_integration_proj.features.auth.data.userExceptions.Connect
 import pa.chan.github_integration_proj.features.auth.data.userExceptions.InvalidCredentialsException
 import pa.chan.github_integration_proj.features.auth.domain.AuthRepository
 import pa.chan.github_integration_proj.features.auth.domain.model.UserModel
+import pa.chan.github_integration_proj.features.detail.data.DetailLocalDatasource
+import pa.chan.github_integration_proj.features.repos.data.ReposLocalDataSource
 import retrofit2.HttpException
 import javax.inject.Inject
 
 
 class AuthRepositoryImpl @Inject constructor(
     private val authRemoteDataSource: AuthRemoteDataSource,
-    private val prefDataSource: PrefDataSource
+    private val prefDataSource: PrefDataSource,
+    private val reposLocalDataSource: ReposLocalDataSource,
+    private val detailLocalDatasource: DetailLocalDatasource
 ) : AuthRepository {
     override suspend fun getUserDetails(token: String): UserModel {
         try {
@@ -32,4 +36,16 @@ class AuthRepositoryImpl @Inject constructor(
         }
 
     }
+
+    override suspend fun logout() {
+        prefDataSource.clearAll()
+        reposLocalDataSource.clearAll()
+        with(detailLocalDatasource) {
+            this.deleteLicense()
+            this.deleteReadme()
+            this.deleteRepoDetail()
+        }
+    }
+
+
 }

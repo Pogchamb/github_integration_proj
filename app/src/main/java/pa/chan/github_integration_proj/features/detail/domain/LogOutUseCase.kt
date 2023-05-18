@@ -1,13 +1,14 @@
 package pa.chan.github_integration_proj.features.detail.domain
 
+import pa.chan.github_integration_proj.features.auth.domain.AuthRepository
 import javax.inject.Inject
 
 class LogOutUseCase @Inject constructor(
-    private val detailRepository: DetailRepository
+    private val authRepository: AuthRepository
 ) {
 
     suspend operator fun invoke() {
-        return detailRepository.logout()
+        return authRepository.logout()
     }
 
 }
