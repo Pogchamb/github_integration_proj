@@ -12,17 +12,13 @@ import pa.chan.github_integration_proj.features.detail.domain.model.*
 fun LicenseDto.toModel(): LicenseModel = LicenseModel(
     name = this.name,
     license = LicenseInfoModel(
-        key = this.license.key,
-        name = this.license.name
+        key = this.license?.key,
+        name = this.license?.name
     )
 )
 
 fun ReadmeDto.toModel(): ReadmeModel = ReadmeModel(
-    encoding = this.encoding,
-    name = this.name,
-    path = this.path,
     content = this.content,
-    url = this.url,
 )
 
 fun RepoDetailDto.toModel(): RepoDetailModel = RepoDetailModel(
@@ -39,23 +35,8 @@ fun RepoDetailDto.toModel(): RepoDetailModel = RepoDetailModel(
 // Convert Dto to Entity
 
 fun ReadmeDto.toEntity(): ReadmeEntity = ReadmeEntity(
-    id = null,
-    type = this.type,
-    encoding = this.encoding,
-    size = this.size,
-    name = this.name,
-    path = this.path,
+    id = 1,
     content = this.content,
-    sha = this.sha,
-    url = this.url,
-    gitUrl = this.gitUrl,
-    htmlUrl = this.htmlUrl,
-    downloadUrl = this.downloadUrl,
-    links = LinksEntity(
-        git = this.links.git,
-        self = this.links.self,
-        html = this.links.html
-    )
 )
 
 fun RepoDetailDto.toEntity(): RepoDetailEntity = RepoDetailEntity(
@@ -71,11 +52,11 @@ fun RepoDetailDto.toEntity(): RepoDetailEntity = RepoDetailEntity(
 )
 
 fun LicenseDto.toEntity(): LicenseEntity = LicenseEntity(
-    id = null,
+    id = 1,
     name = this.name,
     license = LicenseInfoEntity(
-        key = this.license.key,
-        name = this.license.name
+        key = this.license?.key,
+        name = this.license?.name
     )
 )
 
@@ -83,27 +64,23 @@ fun LicenseDto.toEntity(): LicenseEntity = LicenseEntity(
 //  Convert Entity to Model
 
 fun LicenseEntity.toModel(): LicenseModel = LicenseModel(
-    name = this.name,
+    name = this.name.toString(),
     license = LicenseInfoModel(
-        key = this.license.key,
-        name = this.license.name
+        key = this.license?.key.toString(),
+        name = this.license?.name.toString()
     )
 )
 
 fun ReadmeEntity.toModel(): ReadmeModel = ReadmeModel(
-    encoding = this.encoding,
-    name = this.name,
-    path = this.path,
-    content = this.content,
-    url = this.url,
+    content = this.content.toString(),
 )
 
 fun RepoDetailEntity.toModel(): RepoDetailModel = RepoDetailModel(
-    name = this.name,
-    fullName = this.fullName,
-    htmlUrl = this.htmlUrl,
-    starsCount = this.starsCount,
-    watchersCount = this.watchersCount,
-    language = this.language,
-    forksCount = this.forksCount
+    name = this.name.toString(),
+    fullName = this.fullName.toString(),
+    htmlUrl = this.htmlUrl.toString(),
+    starsCount = this.starsCount.toString(),
+    watchersCount = this.watchersCount.toString(),
+    language = this.language.toString(),
+    forksCount = this.forksCount.toString()
 )

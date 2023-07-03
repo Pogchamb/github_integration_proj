@@ -9,7 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+
 import pa.chan.githubintagrationproj.databinding.FragmentReposBinding
+import pa.chan.githubintagrationproj.databinding.ToolbarBinding
 
 @AndroidEntryPoint
 class ReposFragment : Fragment() {
@@ -19,11 +21,15 @@ class ReposFragment : Fragment() {
     private var _binding: FragmentReposBinding? = null
     private val binding get() = _binding
 
+    private var _toolbarBinding: ToolbarBinding? = null
+    private val toolbarBinding get() = _toolbarBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentReposBinding.inflate(inflater, container, false)
+        _toolbarBinding = binding?.toolbar
         val view = binding?.root
         return view
     }
@@ -31,11 +37,13 @@ class ReposFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        _toolbarBinding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        viewModel.fetchRepos()
+        toolbarBinding?.backBtn?.visibility = View.GONE
+
 
         binding?.reposRecyclerView?.layoutManager = LinearLayoutManager(requireContext())
 
@@ -43,7 +51,16 @@ class ReposFragment : Fragment() {
             binding?.reposRecyclerView?.visibility = View.VISIBLE
             binding?.errorBtn?.visibility = View.GONE
             binding?.ErrorField?.visibility = View.GONE
-            binding?.reposRecyclerView?.adapter = ReposAdapter(it)
+
+            binding?.reposRecyclerView?.adapter = ReposAdapter(it).apply {
+                this.onRepoClick = { repo ->
+                    findNavController().navigate(
+                        ReposFragmentDirections.actionReposFragmentToDetailFragment(
+                            repo
+                        )
+                    )
+                }
+            }
         }
 
         viewModel.errorLiveData.observe(viewLifecycleOwner) {
@@ -69,10 +86,11 @@ class ReposFragment : Fragment() {
         }
 
 
-        binding?.logOut?.setOnClickListener {
+        toolbarBinding?.logOut?.setOnClickListener {
             viewModel.logOut()
         }
 
+        viewModel.fetchRepos()
 
     }
 

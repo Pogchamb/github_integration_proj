@@ -1,16 +1,18 @@
 package pa.chan.github_integration_proj.features.detail.data.entity
 
+import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-data class LicenseEntity(
+@Entity
+class LicenseEntity(
     @PrimaryKey
-    val id: Int?,
-    val name: String,
-    val license: LicenseInfoEntity
+    var id: Int = 0,
+    var name: String? = "",
+    var license: LicenseInfoEntity? = LicenseInfoEntity("","")
 )
 
 data class LicenseInfoEntity(
-    val key: String,
-    val name: String,
+    var key: String?,
+    var name: String?,
 )
 

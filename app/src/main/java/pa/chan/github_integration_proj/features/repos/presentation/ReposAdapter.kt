@@ -6,10 +6,14 @@ import androidx.recyclerview.widget.RecyclerView
 import pa.chan.github_integration_proj.features.repos.domain.model.ReposModel
 import pa.chan.githubintagrationproj.databinding.RepositoryItemBinding
 
-class ReposAdapter(private val reposModelList: List<ReposModel>): RecyclerView.Adapter<ReposViewHolder>() {
+class ReposAdapter(private val reposModelList: List<ReposModel>) :
+    RecyclerView.Adapter<ReposViewHolder>() {
+    var onRepoClick: ((String) -> Unit) = {}
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReposViewHolder {
-        val itemBinding = RepositoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ReposViewHolder(itemBinding)
+        val itemBinding =
+            RepositoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ReposViewHolder(itemBinding, onRepoClick)
     }
 
     override fun getItemCount(): Int = reposModelList.size

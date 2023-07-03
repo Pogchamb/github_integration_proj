@@ -10,14 +10,14 @@ import pa.chan.github_integration_proj.features.detail.data.entity.RepoDetailEnt
 @Dao
 interface DetailDao {
 
-    @Query("SELECT * FROM licenseentity WHERE repoName=:repoName")
-    suspend fun getLicence(repoName: String): List<LicenseEntity>
+    @Query("SELECT * FROM licenseEntity")
+    suspend fun getLicence(): List<LicenseEntity>
 
-    @Query("SELECT * FROM readmeentity WHERE repoName=:repoName")
-    suspend fun getReadme(repoName: String): List<ReadmeEntity>
+    @Query("SELECT * FROM readmeEntity")
+    suspend fun getReadme(): List<ReadmeEntity>
 
-    @Query("SELECT * FROM repodetailentity WHERE repoName=:repoName")
-    suspend fun getRepoDetail(repoName: String): List<RepoDetailEntity>
+    @Query("SELECT * FROM repodetailEntity")
+    suspend fun getRepoDetail(): List<RepoDetailEntity>
 
     @Insert
     suspend fun insertLicense(licenseEntity: LicenseEntity)
@@ -28,12 +28,12 @@ interface DetailDao {
     @Insert
     suspend fun insertRepoDetail(repoDetailEntity: RepoDetailEntity)
 
-    @Query("DELETE FROM licenseentity")
+    @Query("DELETE FROM licenseEntity")
     suspend fun deleteLicense()
 
-    @Query("DELETE FROM readmeentity")
+    @Query("DELETE FROM readmeEntity")
     suspend fun deleteReadme()
 
-    @Query("DELETE FROM repodetailentity")
+    @Query("DELETE FROM repodetailEntity")
     suspend fun deleteRepoDetail()
 }

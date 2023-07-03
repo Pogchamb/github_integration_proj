@@ -8,19 +8,19 @@ import retrofit2.http.Path
 
 
 interface DetailApi {
-    @GET("/repos/{owner}/{repo}/readme")
+    @GET(value = "/repos/{owner}/{repo}/contents/README.md")
     suspend fun getReadme(
         @Path(value = "owner") owner: String,
         @Path(value = "repo") repo: String
     ): ReadmeDto
 
-    @GET("/repos/{owner}/{repo}/license")
+    @GET(value = "/repos/{owner}/{repo}/license")
     suspend fun getLicense(
         @Path(value = "owner") owner: String,
         @Path(value = "repo") repo: String
     ): LicenseDto
 
-    @GET("/repos/{owner}/{repo}")
+    @GET(value = "/repos/{owner}/{repo}")
     suspend fun getRepoDetail(
         @Path(value = "owner") owner: String,
         @Path(value = "repo") repo: String

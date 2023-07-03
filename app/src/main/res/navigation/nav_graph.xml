@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_reposFragment_to_authFragment"
             app:destination="@id/authFragment" />
+        <action
+            android:id="@+id/action_reposFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -34,5 +37,20 @@
         <action
             android:id="@+id/action_splashFragment_to_reposFragment"
             app:destination="@id/reposFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="pa.chan.github_integration_proj.features.detail.presentation.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <action
+            android:id="@+id/action_detailFragment_to_reposFragment"
+            app:destination="@id/reposFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_authFragment"
+            app:destination="@id/authFragment" />
+        <argument
+            android:name="repo"
+            app:argType="string" />
     </fragment>
 </navigation>
