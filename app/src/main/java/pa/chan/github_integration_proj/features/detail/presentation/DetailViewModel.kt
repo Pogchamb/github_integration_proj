@@ -31,7 +31,6 @@ class DetailViewModel @Inject constructor(
     val logoutLiveData: LiveData<Boolean>
         get() = _logoutLiveData
 
-
     fun fetchRepoDetail(repo: String) {
         viewModelScope.launch {
             try {

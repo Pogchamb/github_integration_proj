@@ -6,6 +6,5 @@ data class RepoDetailModel(
     val htmlUrl: String,
     val starsCount: String,
     val watchersCount: String,
-    val language: String,
     val forksCount: String,
 )

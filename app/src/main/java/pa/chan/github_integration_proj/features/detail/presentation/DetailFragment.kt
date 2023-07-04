@@ -48,16 +48,13 @@ class DetailFragment : Fragment() {
 
         _toolbarBinding?.headerRepo?.text = args.repo
 
+
         viewModel.detailLiveData.observe(viewLifecycleOwner) {
-            binding?.errorLayout?.visibility = View.GONE
-            binding?.linkLayout?.visibility = View.VISIBLE
-            binding?.licenseLayout?.visibility = View.VISIBLE
-            binding?.statsLayout?.visibility = View.VISIBLE
-            binding?.readmeTextView?.visibility = View.VISIBLE
+            setError(error = false)
 
             binding?.linkText?.text = it.repoDetailModel.htmlUrl
-            binding?.licenseText?.text = it.licenseModel.name ?: "no license"
-            binding?.licenseName?.text = it.licenseModel.license?.key ?: "-/-"
+            binding?.licenseText?.text = it.licenseModel.name
+            binding?.licenseName?.text = it.licenseModel.license.key
             binding?.starText?.text = it.repoDetailModel.starsCount
             binding?.forksText?.text = it.repoDetailModel.forksCount
             binding?.watchersText?.text = it.repoDetailModel.watchersCount
@@ -72,14 +69,10 @@ class DetailFragment : Fragment() {
         }
 
         viewModel.errorLiveData.observe(viewLifecycleOwner) {
+            setError(error = true)
+
             binding?.ErrorImg?.setImageResource(it.errorImg)
             binding?.ErrorMessage?.text = getString(it.errorMessage)
-            binding?.errorLayout?.visibility = View.VISIBLE
-            binding?.linkLayout?.visibility = View.GONE
-            binding?.licenseLayout?.visibility = View.GONE
-            binding?.statsLayout?.visibility = View.GONE
-            binding?.readmeTextView?.visibility = View.GONE
-
         }
 
         toolbarBinding?.backBtn?.setOnClickListener {
@@ -102,5 +95,22 @@ class DetailFragment : Fragment() {
             viewModel.logout()
         }
 
+
+    }
+
+    private fun setError(error: Boolean) {
+        if (error) {
+            binding?.errorLayout?.visibility = View.VISIBLE
+            binding?.linkLayout?.visibility = View.GONE
+            binding?.licenseLayout?.visibility = View.GONE
+            binding?.statsLayout?.visibility = View.GONE
+            binding?.readmeTextView?.visibility = View.GONE
+        } else {
+            binding?.errorLayout?.visibility = View.GONE
+            binding?.linkLayout?.visibility = View.VISIBLE
+            binding?.licenseLayout?.visibility = View.VISIBLE
+            binding?.statsLayout?.visibility = View.VISIBLE
+            binding?.readmeTextView?.visibility = View.VISIBLE
+        }
     }
 }

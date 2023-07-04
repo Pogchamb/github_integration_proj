@@ -10,6 +10,5 @@ data class RepoDetailDto(
     @SerializedName("html_url") val htmlUrl: String,
     @SerializedName("stargazers_count") val starsCount: String,
     @SerializedName("watchers_count") val watchersCount: String,
-    val language: String,
     @SerializedName("forks_count") val forksCount: String,
 )

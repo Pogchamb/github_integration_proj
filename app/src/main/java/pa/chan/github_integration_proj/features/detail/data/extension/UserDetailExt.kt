@@ -27,7 +27,6 @@ fun RepoDetailDto.toModel(): RepoDetailModel = RepoDetailModel(
     htmlUrl = this.htmlUrl,
     starsCount = this.starsCount,
     watchersCount = this.watchersCount,
-    language = this.language,
     forksCount = this.forksCount
 )
 
@@ -47,7 +46,6 @@ fun RepoDetailDto.toEntity(): RepoDetailEntity = RepoDetailEntity(
     htmlUrl = this.htmlUrl,
     starsCount = this.starsCount,
     watchersCount = this.watchersCount,
-    language = this.language,
     forksCount = this.forksCount
 )
 
@@ -81,6 +79,5 @@ fun RepoDetailEntity.toModel(): RepoDetailModel = RepoDetailModel(
     htmlUrl = this.htmlUrl.toString(),
     starsCount = this.starsCount.toString(),
     watchersCount = this.watchersCount.toString(),
-    language = this.language.toString(),
     forksCount = this.forksCount.toString()
 )

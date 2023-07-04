@@ -13,6 +13,5 @@ class RepoDetailEntity(
     var htmlUrl: String? = "",
     var starsCount: String? = "",
     var watchersCount: String? = "",
-    var language: String? = "",
     var forksCount: String? = "",
 )

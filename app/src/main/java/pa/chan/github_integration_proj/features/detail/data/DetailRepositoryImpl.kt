@@ -3,13 +3,11 @@ package pa.chan.github_integration_proj.features.detail.data
 import pa.chan.github_integration_proj.features.auth.data.PrefDataSource
 import pa.chan.github_integration_proj.features.auth.data.userExceptions.ConnectionException
 import pa.chan.github_integration_proj.features.detail.data.dto.LicenseDto
+import pa.chan.github_integration_proj.features.detail.data.dto.LicenseInfoDto
 import pa.chan.github_integration_proj.features.detail.data.dto.ReadmeDto
 import pa.chan.github_integration_proj.features.detail.data.extension.toEntity
 import pa.chan.github_integration_proj.features.detail.data.extension.toModel
 import pa.chan.github_integration_proj.features.detail.domain.DetailRepository
-import pa.chan.github_integration_proj.features.detail.domain.model.LicenseModel
-import pa.chan.github_integration_proj.features.detail.domain.model.ReadmeModel
-import pa.chan.github_integration_proj.features.detail.domain.model.RepoDetailModel
 import pa.chan.github_integration_proj.features.detail.domain.model.RepositoryModel
 import pa.chan.github_integration_proj.features.repos.data.ReposLocalDataSource
 import retrofit2.HttpException
@@ -30,13 +28,13 @@ class DetailRepositoryImpl @Inject constructor(
             val license = try {
                 detailRemoteDataSource.getLicense(owner, repo)
             } catch (e: HttpException) {
-                LicenseDto(null, null)
+                LicenseDto(license = LicenseInfoDto())
             }
 
             val readme = try {
                 detailRemoteDataSource.getReadme(owner, repo)
             } catch (e: HttpException) {
-                ReadmeDto(null, null)
+                ReadmeDto()
             }
 
 //            with(detailLocalDatasource) {
