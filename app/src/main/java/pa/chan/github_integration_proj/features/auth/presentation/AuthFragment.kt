@@ -11,7 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import pa.chan.github_integration_proj.features.auth.data.userExceptions.InvalidCredentialsException
-import pa.chan.github_integration_proj.features.utils.ProgressBarActions
+import pa.chan.github_integration_proj.features.utils.finishAction
+import pa.chan.github_integration_proj.features.utils.startAction
 import pa.chan.githubintagrationproj.R
 import pa.chan.githubintagrationproj.databinding.FragmentAuthBinding
 
@@ -59,7 +60,7 @@ class AuthFragment : Fragment() {
 
         viewModel.userLiveData.observe(viewLifecycleOwner) {
             val action = AuthFragmentDirections.actionAuthFragmentToReposFragment()
-            binding?.let { bind -> ProgressBarActions().startAction(bind) }
+            binding?.finishAction()
             findNavController().navigate(action)
         }
 
@@ -77,7 +78,7 @@ class AuthFragment : Fragment() {
         authBtn?.progressBtn?.setOnClickListener { _ ->
             val token: String = tokenEditText?.text.toString()
 
-            binding?.let { ProgressBarActions().finishAction(it) }
+            binding?.startAction()
 
             when {
                 token.isEmpty() -> {

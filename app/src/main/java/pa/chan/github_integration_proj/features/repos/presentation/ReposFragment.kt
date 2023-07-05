@@ -9,7 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import pa.chan.github_integration_proj.features.utils.ProgressBarActions
+import pa.chan.github_integration_proj.features.utils.failedFinishAction
+import pa.chan.github_integration_proj.features.utils.startAction
+import pa.chan.github_integration_proj.features.utils.succeedFinishAction
 
 import pa.chan.githubintagrationproj.databinding.FragmentReposBinding
 import pa.chan.githubintagrationproj.databinding.ToolbarBinding
@@ -42,14 +44,13 @@ class ReposFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding?.let { ProgressBarActions().startAction(it) }
+        binding?.startAction()
         toolbarBinding?.backBtn?.visibility = View.GONE
 
         binding?.reposRecyclerView?.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel.reposLiveData.observe(viewLifecycleOwner) {
-            binding?.let { bind -> ProgressBarActions().succeedFinishAction(bind) }
-
+            binding?.succeedFinishAction()
             binding?.reposRecyclerView?.adapter = ReposAdapter(it).apply {
                 this.onRepoClick = { repo ->
                     findNavController().navigate(
@@ -65,7 +66,7 @@ class ReposFragment : Fragment() {
             binding?.ErrorImg?.setImageResource(it.errorImg)
             binding?.ErrorName?.text = getString(it.errorName)
             binding?.ErrorMessage?.text = getString(it.errorMessage)
-            binding?.let { bind -> ProgressBarActions().failedFinishAction(bind) }
+            binding?.failedFinishAction()
 
         }
 
