@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import pa.chan.github_integration_proj.features.utils.ProgressBarActions
 
 import pa.chan.githubintagrationproj.databinding.FragmentReposBinding
 import pa.chan.githubintagrationproj.databinding.ToolbarBinding
@@ -41,16 +42,13 @@ class ReposFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        binding?.let { ProgressBarActions().startAction(it) }
         toolbarBinding?.backBtn?.visibility = View.GONE
-
 
         binding?.reposRecyclerView?.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel.reposLiveData.observe(viewLifecycleOwner) {
-            binding?.reposRecyclerView?.visibility = View.VISIBLE
-            binding?.errorBtn?.visibility = View.GONE
-            binding?.ErrorField?.visibility = View.GONE
+            binding?.let { bind -> ProgressBarActions().succeedFinishAction(bind) }
 
             binding?.reposRecyclerView?.adapter = ReposAdapter(it).apply {
                 this.onRepoClick = { repo ->
@@ -64,13 +62,10 @@ class ReposFragment : Fragment() {
         }
 
         viewModel.errorLiveData.observe(viewLifecycleOwner) {
-
-            binding?.reposRecyclerView?.visibility = View.GONE
-            binding?.errorBtn?.visibility = View.VISIBLE
-            binding?.ErrorField?.visibility = View.VISIBLE
             binding?.ErrorImg?.setImageResource(it.errorImg)
             binding?.ErrorName?.text = getString(it.errorName)
             binding?.ErrorMessage?.text = getString(it.errorMessage)
+            binding?.let { bind -> ProgressBarActions().failedFinishAction(bind) }
 
         }
 
@@ -89,6 +84,7 @@ class ReposFragment : Fragment() {
         toolbarBinding?.logOut?.setOnClickListener {
             viewModel.logOut()
         }
+
 
         viewModel.fetchRepos()
 

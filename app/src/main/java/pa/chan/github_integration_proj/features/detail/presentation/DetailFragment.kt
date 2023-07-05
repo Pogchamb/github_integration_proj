@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import com.crescentflare.simplemarkdownparser.conversion.SimpleMarkdownConverter
 import dagger.hilt.android.AndroidEntryPoint
 import okio.ByteString.Companion.decodeBase64
+import pa.chan.github_integration_proj.features.utils.ProgressBarActions
 import pa.chan.githubintagrationproj.databinding.FragmentDetailBinding
 import pa.chan.githubintagrationproj.databinding.ToolbarBinding
 
@@ -44,14 +45,12 @@ class DetailFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding?.let { ProgressBarActions().startAction(it) }
         viewModel.fetchRepoDetail(args.repo)
 
         _toolbarBinding?.headerRepo?.text = args.repo
 
-
         viewModel.detailLiveData.observe(viewLifecycleOwner) {
-            setError(error = false)
-
             binding?.linkText?.text = it.repoDetailModel.htmlUrl
             binding?.licenseText?.text = it.licenseModel.name
             binding?.licenseName?.text = it.licenseModel.license.key
@@ -61,6 +60,9 @@ class DetailFragment : Fragment() {
             val readmeText = it.readmeModel.content?.decodeBase64().toString()
             binding?.readmeTextView?.text = SimpleMarkdownConverter.toSpannable(readmeText)
 
+
+            binding?.let { bind -> ProgressBarActions().succeedFinishAction(bind) }
+
             binding?.linkText?.setOnClickListener { _ ->
                 val webpage = Uri.parse(it.repoDetailModel.htmlUrl)
                 val intent = Intent(Intent.ACTION_VIEW, webpage)
@@ -69,10 +71,10 @@ class DetailFragment : Fragment() {
         }
 
         viewModel.errorLiveData.observe(viewLifecycleOwner) {
-            setError(error = true)
-
             binding?.ErrorImg?.setImageResource(it.errorImg)
             binding?.ErrorMessage?.text = getString(it.errorMessage)
+
+            binding?.let { bind -> ProgressBarActions().failedFinishAction(bind) }
         }
 
         toolbarBinding?.backBtn?.setOnClickListener {
@@ -96,21 +98,5 @@ class DetailFragment : Fragment() {
         }
 
 
-    }
-
-    private fun setError(error: Boolean) {
-        if (error) {
-            binding?.errorLayout?.visibility = View.VISIBLE
-            binding?.linkLayout?.visibility = View.GONE
-            binding?.licenseLayout?.visibility = View.GONE
-            binding?.statsLayout?.visibility = View.GONE
-            binding?.readmeTextView?.visibility = View.GONE
-        } else {
-            binding?.errorLayout?.visibility = View.GONE
-            binding?.linkLayout?.visibility = View.VISIBLE
-            binding?.licenseLayout?.visibility = View.VISIBLE
-            binding?.statsLayout?.visibility = View.VISIBLE
-            binding?.readmeTextView?.visibility = View.VISIBLE
-        }
     }
 }

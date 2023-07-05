@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import pa.chan.github_integration_proj.features.auth.data.userExceptions.InvalidCredentialsException
+import pa.chan.github_integration_proj.features.utils.ProgressBarActions
 import pa.chan.githubintagrationproj.R
 import pa.chan.githubintagrationproj.databinding.FragmentAuthBinding
 
@@ -21,6 +22,7 @@ class AuthFragment : Fragment() {
 
     private var _binding: FragmentAuthBinding? = null
     private val binding get() = _binding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +40,7 @@ class AuthFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
 
-        val authButton = binding?.authButton
+        val authBtn = binding?.authButton
         val tokenEditText = binding?.tokenEditText
         val tokenInputLayout = binding?.tokenInputLayout
 
@@ -57,6 +59,7 @@ class AuthFragment : Fragment() {
 
         viewModel.userLiveData.observe(viewLifecycleOwner) {
             val action = AuthFragmentDirections.actionAuthFragmentToReposFragment()
+            binding?.let { bind -> ProgressBarActions().startAction(bind) }
             findNavController().navigate(action)
         }
 
@@ -71,8 +74,10 @@ class AuthFragment : Fragment() {
             }
         }
 
-        authButton?.setOnClickListener { _ ->
+        authBtn?.progressBtn?.setOnClickListener { _ ->
             val token: String = tokenEditText?.text.toString()
+
+            binding?.let { ProgressBarActions().finishAction(it) }
 
             when {
                 token.isEmpty() -> {
