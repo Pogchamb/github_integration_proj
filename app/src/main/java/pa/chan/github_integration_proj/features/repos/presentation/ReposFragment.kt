@@ -9,6 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import pa.chan.github_integration_proj.features.utils.failedFinishAction
+import pa.chan.github_integration_proj.features.utils.startAction
+import pa.chan.github_integration_proj.features.utils.succeedFinishAction
 
 import pa.chan.githubintagrationproj.databinding.FragmentReposBinding
 import pa.chan.githubintagrationproj.databinding.ToolbarBinding
@@ -41,17 +44,13 @@ class ReposFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        binding?.startAction()
         toolbarBinding?.backBtn?.visibility = View.GONE
-
 
         binding?.reposRecyclerView?.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel.reposLiveData.observe(viewLifecycleOwner) {
-            binding?.reposRecyclerView?.visibility = View.VISIBLE
-            binding?.errorBtn?.visibility = View.GONE
-            binding?.ErrorField?.visibility = View.GONE
-
+            binding?.succeedFinishAction()
             binding?.reposRecyclerView?.adapter = ReposAdapter(it).apply {
                 this.onRepoClick = { repo ->
                     findNavController().navigate(
@@ -64,13 +63,10 @@ class ReposFragment : Fragment() {
         }
 
         viewModel.errorLiveData.observe(viewLifecycleOwner) {
-
-            binding?.reposRecyclerView?.visibility = View.GONE
-            binding?.errorBtn?.visibility = View.VISIBLE
-            binding?.ErrorField?.visibility = View.VISIBLE
             binding?.ErrorImg?.setImageResource(it.errorImg)
             binding?.ErrorName?.text = getString(it.errorName)
             binding?.ErrorMessage?.text = getString(it.errorMessage)
+            binding?.failedFinishAction()
 
         }
 
@@ -89,6 +85,7 @@ class ReposFragment : Fragment() {
         toolbarBinding?.logOut?.setOnClickListener {
             viewModel.logOut()
         }
+
 
         viewModel.fetchRepos()
 
