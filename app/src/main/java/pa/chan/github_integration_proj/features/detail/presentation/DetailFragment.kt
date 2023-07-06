@@ -16,6 +16,7 @@ import okio.ByteString.Companion.decodeBase64
 import pa.chan.github_integration_proj.features.utils.failedFinishAction
 import pa.chan.github_integration_proj.features.utils.startAction
 import pa.chan.github_integration_proj.features.utils.succeedFinishAction
+import pa.chan.githubintagrationproj.R
 import pa.chan.githubintagrationproj.databinding.FragmentDetailBinding
 import pa.chan.githubintagrationproj.databinding.ToolbarBinding
 
@@ -54,14 +55,14 @@ class DetailFragment : Fragment() {
 
         viewModel.detailLiveData.observe(viewLifecycleOwner) {
             binding?.linkText?.text = it.repoDetailModel.htmlUrl
-            binding?.licenseText?.text = it.licenseModel.name
-            binding?.licenseName?.text = it.licenseModel.license.key
+            binding?.licenseText?.text = it.licenseModel?.name ?: getString(R.string.no_license)
+            binding?.licenseName?.text = it.licenseModel?.license?.key ?: "-/-"
             binding?.starText?.text = it.repoDetailModel.starsCount
             binding?.forksText?.text = it.repoDetailModel.forksCount
             binding?.watchersText?.text = it.repoDetailModel.watchersCount
-            val readmeText = it.readmeModel?.content?.decodeBase64().toString()
-            binding?.readmeTextView?.text = SimpleMarkdownConverter.toSpannable(readmeText)
-
+            val readmeText = it.readmeModel?.content ?: getString(R.string.no_readme)
+            binding?.readmeTextView?.text =
+                SimpleMarkdownConverter.toSpannable(readmeText.decodeBase64().toString())
 
             binding?.succeedFinishAction()
 

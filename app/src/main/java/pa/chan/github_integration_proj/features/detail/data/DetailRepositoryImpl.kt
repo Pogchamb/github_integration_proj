@@ -28,7 +28,7 @@ class DetailRepositoryImpl @Inject constructor(
             val license = try {
                 detailRemoteDataSource.getLicense(owner, repo)
             } catch (e: HttpException) {
-                LicenseDto(license = LicenseInfoDto())
+                null
             }
 
             val readme = try {
@@ -43,7 +43,7 @@ class DetailRepositoryImpl @Inject constructor(
 //                this.insertReadme(readme.toEntity())
 //            }
 
-            RepositoryModel(license.toModel(), readme?.toModel(), repoDetail.toModel())
+            RepositoryModel(license?.toModel(), readme?.toModel(), repoDetail.toModel())
         } catch (e: Exception) {
             throw ConnectionException
         }

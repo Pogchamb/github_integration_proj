@@ -2,6 +2,8 @@
     <string name="app_name">Github Integration proj</string>
 
     <string name="license">License</string>
+    <string name="no_license">no license</string>
+    <string name="no_readme">bm8gcmVhZG1l</string>
 
     <string name="access_token">Personal access token</string>
     <string name="username">Username</string>
