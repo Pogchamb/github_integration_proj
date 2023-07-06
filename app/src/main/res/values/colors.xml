@@ -11,6 +11,9 @@
     <color name="grey">#21262D</color>
     <color name="white">#FFFFFF</color>
 
+    <color name="stars">#FAD876</color>
+    <color name="forks">#6ED370</color>
+    <color name="watchers">#9CFFF9</color>
 
 
     <color name="purple_200">#FFBB86FC</color>

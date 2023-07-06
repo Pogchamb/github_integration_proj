@@ -9,16 +9,16 @@ class DetailLocalDatasource @Inject constructor(
     private val detailDao: DetailDao
 ) {
 
-    suspend fun getLicense(repoName: String): List<LicenseEntity> {
-        return detailDao.getLicence(repoName)
+    suspend fun getLicense(): List<LicenseEntity> {
+        return detailDao.getLicence()
     }
 
-    suspend fun getReadme(repoName: String): List<ReadmeEntity> {
-        return detailDao.getReadme(repoName)
+    suspend fun getReadme(): List<ReadmeEntity> {
+        return detailDao.getReadme()
     }
 
-    suspend fun getRepoDetail(repoName: String): List<RepoDetailEntity> {
-        return detailDao.getRepoDetail(repoName)
+    suspend fun getRepoDetail(): List<RepoDetailEntity> {
+        return detailDao.getRepoDetail()
     }
 
     suspend fun insertLicense(licenseEntity: LicenseEntity) {
