@@ -49,17 +49,17 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding?.startAction()
-        viewModel.fetchRepoDetail(args.repo)
+        viewModel.fetchRepoDetail(args.repo, args.id)
 
         _toolbarBinding?.headerRepo?.text = args.repo
 
         viewModel.detailLiveData.observe(viewLifecycleOwner) {
-            binding?.linkText?.text = it.repoDetailModel.htmlUrl
+            binding?.linkText?.text = it.repoDetailModel?.htmlUrl
             binding?.licenseText?.text = it.licenseModel?.name ?: getString(R.string.no_license)
             binding?.licenseName?.text = it.licenseModel?.license?.key ?: "-/-"
-            binding?.starText?.text = it.repoDetailModel.starsCount
-            binding?.forksText?.text = it.repoDetailModel.forksCount
-            binding?.watchersText?.text = it.repoDetailModel.watchersCount
+            binding?.starText?.text = it.repoDetailModel?.starsCount
+            binding?.forksText?.text = it.repoDetailModel?.forksCount
+            binding?.watchersText?.text = it.repoDetailModel?.watchersCount
             val readmeText = it.readmeModel?.content ?: getString(R.string.no_readme)
             binding?.readmeTextView?.text =
                 SimpleMarkdownConverter.toSpannable(readmeText.decodeBase64().toString())
@@ -67,7 +67,7 @@ class DetailFragment : Fragment() {
             binding?.succeedFinishAction()
 
             binding?.linkText?.setOnClickListener { _ ->
-                val webpage = Uri.parse(it.repoDetailModel.htmlUrl)
+                val webpage = Uri.parse(it.repoDetailModel?.htmlUrl)
                 val intent = Intent(Intent.ACTION_VIEW, webpage)
                 startActivity(intent)
             }
@@ -76,7 +76,6 @@ class DetailFragment : Fragment() {
         viewModel.errorLiveData.observe(viewLifecycleOwner) {
             binding?.ErrorImg?.setImageResource(it.errorImg)
             binding?.ErrorMessage?.text = getString(it.errorMessage)
-
             binding?.failedFinishAction()
         }
 
@@ -93,13 +92,13 @@ class DetailFragment : Fragment() {
         }
 
         binding?.errorBtn?.setOnClickListener {
-            viewModel.fetchRepoDetail(args.repo)
+            binding?.startAction()
+            viewModel.fetchRepoDetail(args.repo, args.id)
         }
 
         toolbarBinding?.logOut?.setOnClickListener {
             viewModel.logout()
         }
-
 
     }
 }

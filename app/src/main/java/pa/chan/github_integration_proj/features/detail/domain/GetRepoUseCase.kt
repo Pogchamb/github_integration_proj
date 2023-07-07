@@ -5,7 +5,8 @@ import javax.inject.Inject
 
 class GetRepoUseCase @Inject constructor(private val detailRepository: DetailRepository) {
 
-    suspend operator fun invoke(repo: String): RepositoryModel {
-        return detailRepository.getRepository(repo)
+    suspend operator fun invoke(repo: String, id: Long?): RepositoryModel {
+        return detailRepository.getRepository(repo, id)
     }
+
 }

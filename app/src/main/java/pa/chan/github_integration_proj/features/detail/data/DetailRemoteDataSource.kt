@@ -22,5 +22,4 @@ class DetailRemoteDataSource @Inject constructor(
         return detailApi.getRepoDetail(owner, repo)
     }
 
-
 }

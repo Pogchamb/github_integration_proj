@@ -52,5 +52,8 @@
         <argument
             android:name="repo"
             app:argType="string" />
+        <argument
+            android:name="id"
+            app:argType="long" />
     </fragment>
 </navigation>

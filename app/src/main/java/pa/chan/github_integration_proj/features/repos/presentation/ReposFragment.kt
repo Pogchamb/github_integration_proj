@@ -52,10 +52,11 @@ class ReposFragment : Fragment() {
         viewModel.reposLiveData.observe(viewLifecycleOwner) {
             binding?.succeedFinishAction()
             binding?.reposRecyclerView?.adapter = ReposAdapter(it).apply {
-                this.onRepoClick = { repo ->
+                this.onRepoClick = { repo, id ->
                     findNavController().navigate(
                         ReposFragmentDirections.actionReposFragmentToDetailFragment(
-                            repo
+                            repo,
+                            id
                         )
                     )
                 }
@@ -78,6 +79,7 @@ class ReposFragment : Fragment() {
         }
 
         binding?.errorBtn?.setOnClickListener {
+            binding?.startAction()
             viewModel.fetchRepos()
         }
 
@@ -90,6 +92,5 @@ class ReposFragment : Fragment() {
         viewModel.fetchRepos()
 
     }
-
 
 }

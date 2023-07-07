@@ -19,10 +19,12 @@ class ReposRepositoryImpl @Inject constructor(
             val reposList = remoteDataSource
                 .getUserRepos(prefDataSource.getUserName())
                 .map {
-                    localDataSource.setRepos(it.toEntity())
+                    if (!localDataSource.getAll().contains(it.toEntity())) {
+                        localDataSource.insertRepos(it.toEntity())
+                    }
                     it.toModel()
                 }
-            if (getUserReposHistory().isEmpty()) throw EmptyReposException
+            if (reposList.isEmpty() && getUserReposHistory().isEmpty()) throw EmptyReposException
             reposList
         } catch (e: EmptyReposException) {
             throw e

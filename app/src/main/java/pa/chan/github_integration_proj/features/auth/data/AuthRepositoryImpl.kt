@@ -40,11 +40,7 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun logout() {
         prefDataSource.clearAll()
         reposLocalDataSource.clearAll()
-        with(detailLocalDatasource) {
-            this.deleteLicense()
-            this.deleteReadme()
-            this.deleteRepoDetail()
-        }
+        detailLocalDatasource.deleteRepository()
     }
 
 

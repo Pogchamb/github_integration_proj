@@ -3,37 +3,21 @@ package pa.chan.github_integration_proj.features.detail.data
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import pa.chan.github_integration_proj.features.detail.data.entity.LicenseEntity
-import pa.chan.github_integration_proj.features.detail.data.entity.ReadmeEntity
-import pa.chan.github_integration_proj.features.detail.data.entity.RepoDetailEntity
+import pa.chan.github_integration_proj.features.detail.data.entity.RepositoryEntity
 
 @Dao
 interface DetailDao {
 
-    @Query("SELECT * FROM licenseEntity")
-    suspend fun getLicence(): List<LicenseEntity>
+    @Query("SELECT * FROM repositoryEntity WHERE id=:id")
+    suspend fun getRepositoryById(id: Long?): RepositoryEntity
 
-    @Query("SELECT * FROM readmeEntity")
-    suspend fun getReadme(): List<ReadmeEntity>
-
-    @Query("SELECT * FROM repodetailEntity")
-    suspend fun getRepoDetail(): List<RepoDetailEntity>
+    @Query("SELECT * FROM repositoryEntity")
+    suspend fun getRepository(): List<RepositoryEntity>
 
     @Insert
-    suspend fun insertLicense(licenseEntity: LicenseEntity)
+    suspend fun insertRepository(repositoryEntity: RepositoryEntity)
 
-    @Insert
-    suspend fun insertReadme(readmeEntity: ReadmeEntity)
+    @Query("DELETE FROM repositoryEntity")
+    suspend fun deleteRepository()
 
-    @Insert
-    suspend fun insertRepoDetail(repoDetailEntity: RepoDetailEntity)
-
-    @Query("DELETE FROM licenseEntity")
-    suspend fun deleteLicense()
-
-    @Query("DELETE FROM readmeEntity")
-    suspend fun deleteReadme()
-
-    @Query("DELETE FROM repodetailEntity")
-    suspend fun deleteRepoDetail()
 }

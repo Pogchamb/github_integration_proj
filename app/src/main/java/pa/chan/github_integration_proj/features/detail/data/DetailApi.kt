@@ -8,6 +8,7 @@ import retrofit2.http.Path
 
 
 interface DetailApi {
+
     @GET(value = "/repos/{owner}/{repo}/contents/README.md")
     suspend fun getReadme(
         @Path(value = "owner") owner: String,

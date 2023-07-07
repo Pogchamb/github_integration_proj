@@ -4,12 +4,12 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-class ReposEntity(
-    @PrimaryKey var id: String = "",
-    var nodeId: String = "",
+data class ReposEntity(
+    @PrimaryKey var id: Long = 0,
+    var nodeId: String? = "",
     var name: String? = "",
     var fullName: String? = "",
-    var private: Boolean = false,
+    var private: Boolean? = false,
     var language: String? = "",
 )
 

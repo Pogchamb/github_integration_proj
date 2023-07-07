@@ -18,6 +18,7 @@ import javax.inject.Singleton
 abstract class RepoDetailModule {
 
     companion object {
+
         @Provides
         @Singleton
         fun provideDetailApi(retrofit: Retrofit): DetailApi = retrofit.create(DetailApi::class.java)

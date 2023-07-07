@@ -33,14 +33,13 @@ class AuthFragment : Fragment() {
         val view = binding?.root
         return view
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-
         val authBtn = binding?.authButton
         val tokenEditText = binding?.tokenEditText
         val tokenInputLayout = binding?.tokenInputLayout
