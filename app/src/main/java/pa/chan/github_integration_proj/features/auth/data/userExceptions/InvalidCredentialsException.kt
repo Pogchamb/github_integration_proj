@@ -8,5 +8,5 @@ object InvalidCredentialsException : Throwable(), UserError {
     override val errorName: Int
         get() = R.string.invalidCredent
     override val errorImg: Int
-        get() = TODO("Not yet implemented")
+        get() = 0
 }

@@ -8,7 +8,7 @@ import pa.chan.githubintagrationproj.databinding.RepositoryItemBinding
 
 class ReposAdapter(private val reposModelList: List<ReposModel>) :
     RecyclerView.Adapter<ReposViewHolder>() {
-    var onRepoClick: ((String) -> Unit) = {}
+    var onRepoClick: ((String, Long) -> Unit) = { repo, id -> }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReposViewHolder {
         val itemBinding =

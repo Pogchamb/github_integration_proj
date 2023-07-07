@@ -34,15 +34,12 @@ fun RepoDetailDto.toModel(): RepoDetailModel = RepoDetailModel(
 // Convert Dto to Entity
 
 fun ReadmeDto.toEntity(): ReadmeEntity = ReadmeEntity(
-    id = 1,
     content = this.content,
 )
 
 fun RepoDetailDto.toEntity(): RepoDetailEntity = RepoDetailEntity(
-    id = this.id,
     name = this.name,
     fullName = this.fullName,
-    private = this.private,
     htmlUrl = this.htmlUrl,
     starsCount = this.starsCount,
     watchersCount = this.watchersCount,
@@ -50,7 +47,6 @@ fun RepoDetailDto.toEntity(): RepoDetailEntity = RepoDetailEntity(
 )
 
 fun LicenseDto.toEntity(): LicenseEntity = LicenseEntity(
-    id = 1,
     name = this.name,
     license = LicenseInfoEntity(
         key = this.license?.key,

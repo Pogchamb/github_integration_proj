@@ -12,7 +12,6 @@ import pa.chan.github_integration_proj.features.repos.domain.ReposRepository
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class ReposModule {

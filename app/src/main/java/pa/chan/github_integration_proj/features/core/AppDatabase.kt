@@ -5,14 +5,12 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import pa.chan.github_integration_proj.features.detail.data.DetailDao
 import pa.chan.github_integration_proj.features.detail.data.converters.EntityConverter
-import pa.chan.github_integration_proj.features.detail.data.entity.LicenseEntity
-import pa.chan.github_integration_proj.features.detail.data.entity.ReadmeEntity
-import pa.chan.github_integration_proj.features.detail.data.entity.RepoDetailEntity
+import pa.chan.github_integration_proj.features.detail.data.entity.RepositoryEntity
 import pa.chan.github_integration_proj.features.repos.data.ReposDao
 import pa.chan.github_integration_proj.features.repos.data.entity.ReposEntity
 
 @Database(
-    entities = [ReposEntity::class, LicenseEntity::class, ReadmeEntity::class, RepoDetailEntity::class],
+    entities = [ReposEntity::class, RepositoryEntity::class],
     version = 1
 )
 @TypeConverters(EntityConverter::class)

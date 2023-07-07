@@ -6,7 +6,7 @@ import pa.chan.githubintagrationproj.databinding.RepositoryItemBinding
 
 class ReposViewHolder(
     private val repositoryItemBinding: RepositoryItemBinding,
-    private val onRepoClick: (String) -> Unit
+    private val onRepoClick: (String, Long) -> Unit
 ) : RecyclerView.ViewHolder(repositoryItemBinding.root) {
 
 
@@ -17,7 +17,7 @@ class ReposViewHolder(
         reposModel.name.let { repo ->
             repositoryItemBinding.root
                 .setOnClickListener {
-                    onRepoClick.invoke(repo.toString())
+                    onRepoClick.invoke(repo.toString(), reposModel.id)
                 }
         }
     }

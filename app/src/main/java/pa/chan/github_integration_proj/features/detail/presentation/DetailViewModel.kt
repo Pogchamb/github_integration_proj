@@ -31,10 +31,10 @@ class DetailViewModel @Inject constructor(
     val logoutLiveData: LiveData<Boolean>
         get() = _logoutLiveData
 
-    fun fetchRepoDetail(repo: String) {
+    fun fetchRepoDetail(repo: String, id: Long?) {
         viewModelScope.launch {
             try {
-                val repoDetail = getRepoUseCase(repo)
+                val repoDetail = getRepoUseCase(repo, id)
                 _detailLiveData.postValue(repoDetail)
             } catch (e: ConnectionException) {
                 _errorLiveData.postValue(e)

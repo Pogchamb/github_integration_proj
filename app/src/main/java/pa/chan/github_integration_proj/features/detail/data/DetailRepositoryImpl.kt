@@ -2,25 +2,22 @@ package pa.chan.github_integration_proj.features.detail.data
 
 import pa.chan.github_integration_proj.features.auth.data.PrefDataSource
 import pa.chan.github_integration_proj.features.auth.data.userExceptions.ConnectionException
-import pa.chan.github_integration_proj.features.detail.data.dto.LicenseDto
-import pa.chan.github_integration_proj.features.detail.data.dto.LicenseInfoDto
-import pa.chan.github_integration_proj.features.detail.data.dto.ReadmeDto
+import pa.chan.github_integration_proj.features.auth.data.userExceptions.EmptyReposException
+import pa.chan.github_integration_proj.features.detail.data.entity.RepositoryEntity
 import pa.chan.github_integration_proj.features.detail.data.extension.toEntity
 import pa.chan.github_integration_proj.features.detail.data.extension.toModel
 import pa.chan.github_integration_proj.features.detail.domain.DetailRepository
 import pa.chan.github_integration_proj.features.detail.domain.model.RepositoryModel
-import pa.chan.github_integration_proj.features.repos.data.ReposLocalDataSource
 import retrofit2.HttpException
 import javax.inject.Inject
 
 class DetailRepositoryImpl @Inject constructor(
     private val detailRemoteDataSource: DetailRemoteDataSource,
     private val detailLocalDatasource: DetailLocalDatasource,
-    private val reposLocalDataSource: ReposLocalDataSource,
     private val prefDataSource: PrefDataSource
 ) : DetailRepository {
 
-    override suspend fun getRepository(repo: String): RepositoryModel {
+    override suspend fun getRepository(repo: String, id: Long?): RepositoryModel {
         return try {
             val owner = prefDataSource.getUserName()
             val repoDetail = detailRemoteDataSource.getRepoDetail(owner, repo)
@@ -37,26 +34,37 @@ class DetailRepositoryImpl @Inject constructor(
                 null
             }
 
-//            with(detailLocalDatasource) {
-//                this.insertRepoDetail(repoDetail.toEntity())
-//                this.insertLicense(license.toEntity())
-//                this.insertReadme(readme.toEntity())
-//            }
+            val reposEntity = RepositoryEntity(
+                repoDetail.id, repoDetail.toEntity(), license?.toEntity(), readme?.toEntity()
+            )
+
+            if (!detailLocalDatasource.getRepository().contains(reposEntity)) {
+                detailLocalDatasource.insertRepository(reposEntity)
+            }
+            if (detailLocalDatasource.getRepository().isEmpty()) throw EmptyReposException
 
             RepositoryModel(license?.toModel(), readme?.toModel(), repoDetail.toModel())
+        } catch (e: EmptyReposException) {
+            throw e
         } catch (e: Exception) {
-            throw ConnectionException
+            if (detailLocalDatasource.getRepository()
+                    .contains(detailLocalDatasource.getRepositoryById(id))
+            ) {
+                getHistory(id)
+            } else {
+                throw ConnectionException
+            }
         }
-
 
     }
 
-    override suspend fun logout() {
-        with(detailLocalDatasource) {
-            this.deleteRepoDetail()
-            this.deleteLicense()
-            this.deleteReadme()
-        }
-        reposLocalDataSource.clearAll()
+    override suspend fun getHistory(id: Long?): RepositoryModel {
+        val repoEntity = detailLocalDatasource.getRepositoryById(id)
+        return RepositoryModel(
+            repoEntity.licenseEntity?.toModel(),
+            repoEntity.readmeEntity?.toModel(),
+            repoEntity.repoDetailEntity?.toModel()
+        )
     }
+
 }

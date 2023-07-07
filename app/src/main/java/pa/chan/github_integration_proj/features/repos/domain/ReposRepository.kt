@@ -7,5 +7,4 @@ interface ReposRepository {
     suspend fun getUserRepos(): List<ReposModel>
 
     suspend fun getUserReposHistory(): List<ReposModel>
-
 }
