@@ -24,3 +24,14 @@
     - watchers
 * Ability to view repositories offline
 * Encryption and saving user information
+
+## Architecture
+- Clean Architecture
+- MVVM
+- Single Activity
+
+## Overview
+
+![screen](https://i.imgur.com/TYg9Kdo.jpg?3)
+![screen](https://i.imgur.com/ld9whQe.jpg?1)
+![screen](https://i.imgur.com/NF1Fqv4.jpg)
