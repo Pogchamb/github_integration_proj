@@ -82,6 +82,8 @@ dependencies {
     implementation "androidx.security:security-crypto:1.1.0-alpha06"
 
     // MarkdownView parser
-    implementation("com.crescentflare.simplemarkdownparser:SimpleMarkdownParserLib:0.7.1")
+    implementation "com.crescentflare.simplemarkdownparser:SimpleMarkdownParserLib:0.7.1"
+
+    implementation "io.noties.markwon:core:4.2.0"
 
 }
