@@ -36,4 +36,4 @@
 
 ![screen](https://i.imgur.com/ld9whQe.jpg?1)
 
-![screen](https://i.imgur.com/NF1Fqv4.jpg)
+![screen](https://i.imgur.com/NF1Fqv4.jpg?1)
