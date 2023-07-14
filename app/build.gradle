@@ -41,6 +41,7 @@ android {
 }
 
 dependencies {
+    final def markwon_version = '4.6.2'
 
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -82,8 +83,9 @@ dependencies {
     implementation "androidx.security:security-crypto:1.1.0-alpha06"
 
     // MarkdownView parser
-    implementation "com.crescentflare.simplemarkdownparser:SimpleMarkdownParserLib:0.7.1"
+    implementation "io.noties.markwon:core:$markwon_version"
 
-    implementation "io.noties.markwon:core:4.2.0"
+    // For image view
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
 
 }
