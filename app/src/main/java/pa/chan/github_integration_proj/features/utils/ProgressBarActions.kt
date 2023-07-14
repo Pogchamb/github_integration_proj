@@ -34,6 +34,7 @@ fun FragmentDetailBinding.startAction() {
     this.statsLayout.visibility = View.GONE
     this.errorLayout.visibility = View.GONE
     this.readmeTextView.visibility = View.GONE
+    this.scrollReadme.visibility = View.GONE
 }
 
 fun FragmentDetailBinding.succeedFinishAction() {
@@ -43,6 +44,7 @@ fun FragmentDetailBinding.succeedFinishAction() {
     this.statsLayout.visibility = View.VISIBLE
     this.errorLayout.visibility = View.GONE
     this.readmeTextView.visibility = View.VISIBLE
+    this.scrollReadme.visibility = View.VISIBLE
 }
 
 fun FragmentDetailBinding.failedFinishAction() {
@@ -52,6 +54,7 @@ fun FragmentDetailBinding.failedFinishAction() {
     this.statsLayout.visibility = View.GONE
     this.errorLayout.visibility = View.VISIBLE
     this.readmeTextView.visibility = View.GONE
+    this.scrollReadme.visibility = View.GONE
 }
 
 fun FragmentAuthBinding.startAction() {

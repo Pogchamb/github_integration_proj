@@ -169,12 +169,20 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <TextView
-        android:id="@+id/readmeTextView"
+    <ScrollView
+        android:id="@+id/scrollReadme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/statsLayout"/>
+        app:layout_constraintTop_toBottomOf="@+id/statsLayout">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/readmeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg"
+            android:isScrollContainer="true"
+            android:textColor="@color/white" />
+    </ScrollView>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
