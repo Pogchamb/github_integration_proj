@@ -1,4 +1,4 @@
-![](https://imgur.com/5NYW8fH.png)
+![](https://i.imgur.com/ni4Ehe0.png)
 
 ## Stack technologies
 - Kotlin
